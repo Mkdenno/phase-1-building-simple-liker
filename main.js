@@ -4,29 +4,28 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-const liker=document.querySelectorAll(".like-glyph")
-const error=document.querySelector('#modal')
+const like=document.querySelectorAll(".like-glyph")
+const errorTxt=document.getElementById('modal')
+console.log(errorTxt)
 
-for(const likes of liker){
-  liker.addEventListerner('click', ()=>{
-    mimicServerCall(url="http://mimicServer.example.com")
+for(const likes of like){
+  likes.addEventListener('click', () => {
+    mimicServerCall("http://mimicServer.example.com")
     .then(()=>{
-      if(liker===EMPTY_HEART){
-        liker.className=".activated-heart";
+      if(likes.innerText===EMPTY_HEART)
+      {
+        likes.innerText=FULL_HEART;
+        likes.className="activated-heart";
       }
       else{
-        liker.innerText===EMPTY_HEART;
+        likes.innerText==EMPTY_HEART;
       }
     })
-    .catch((message)=>{
-      error.className="";
-      error.innerText=message;
-      setTimeout(()=>{
-        error.className="hidden", 3000;
-      })
+    .catch((msg) => {
+      errorTxt.className = ""
+      errorTxt.innerText = msg
+      setTimeout(() =>  errorTxt.className = "hidden", 3000);
     })
-
-
   })
 }
 
